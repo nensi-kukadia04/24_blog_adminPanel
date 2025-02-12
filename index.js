@@ -2,17 +2,17 @@ const express=require('express');
 const port=8000;
 const app=express();
 const path=require('path');
-const db=require('./config/db');
+// const db=require('./config/db');
 const cookieParser=require('cookie-parser');
-// const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
-// mongoose.connect(
-//     "mongodb+srv://kukadiyanensi838:HSDmIm2lmEgtkfVa@cluster0.j60zp.mongodb.net/LTE4").then((res) => {
-//         console.log("Database is Online Connected");
-//     })
-//     .catch((err) => {
-//         console.log("Database is not Connected",err);
-//     });
+mongoose.connect(
+    "mongodb+srv://kukadiyanensi838:HSDmIm2lmEgtkfVa@cluster0.j60zp.mongodb.net/LTE4").then((res) => {
+        console.log("Database is Online Connected");
+    })
+    .catch((err) => {
+        console.log("Database is not Connected",err);
+    });
 
 const session=require('express-session');
 const passport=require('passport');

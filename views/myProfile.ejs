@@ -1,0 +1,128 @@
+
+
+<%- include('layouts/header') %>
+
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+           
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title m-b-0">Admin Data</h5>
+                            </div>
+                            <div class="container">
+                                <div class="main-body">
+                                      <!-- /Breadcrumb -->
+                                      <div class="row gutters-sm">
+                                        <div class="col-md-4 mb-3">
+                                          <div class="card">
+                                            <div class="card-body">
+                                              <div class="d-flex flex-column align-items-center text-center">
+                                                <img src="<%=locals.user.image%>" alt="Admin" class="rounded-circle" width="150" height="150">
+                                                <div class="mt-3">
+                                                  <h4><%= locals.user.name%></h4>
+                                                  <button class="btn btn-primary">Follow</button>
+                                                  <button class="btn btn-outline-primary">Message</button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        
+                                        </div>
+                                        <div class="col-md-8">
+                                          <div class="card mb-3">
+                                            <div class="card-body">
+                                              <div class="row">
+                                                <div class="col-sm-3">
+                                                  <h6 class="mb-0">Full Name</h6>
+                                                </div>
+                                                <div class="col-sm-9 text-secondary">
+                                                 <%= locals.user.name  %> 
+                                                </div>
+                                              </div>
+                                              <hr>
+                                              <div class="row">
+                                                <div class="col-sm-3">
+                                                  <h6 class="mb-0">Email</h6>
+                                                </div>
+                                                <div class="col-sm-9 text-secondary">
+                                                  <%= locals.user.email  %>
+                                                </div>
+                                              </div>
+                                              <hr>
+                                              <div class="row">
+                                                <div class="col-sm-3">
+                                                  <h6 class="mb-0">Message</h6>
+                                                </div>
+                                                <div class="col-sm-9 text-secondary">
+                                               <%= locals.user.message  %> 
+                                                </div>
+                                              </div>
+                                              <hr>
+                                              <div class="row">
+                                                <div class="col-sm-3">
+                                                  <h6 class="mb-0">Gender</h6>
+                                                </div>
+                                                <div class="col-sm-9 text-secondary">
+                                                 <%= locals.user.gender  %>
+                                                </div>
+                                              </div>
+                                              <hr>
+                                              <div class="row">
+                                                <div class="col-sm-3">
+                                                  <h6 class="mb-0">Hobby</h6>
+                                                </div>
+                                                <div class="col-sm-9 text-secondary">
+                                                  <%=locals.user.hobby  %>
+                                                </div>
+                                              </div>
+                                              <hr>
+                                              <div class="row">
+                                                <div class="col-sm-3">
+                                                  <h6 class="mb-0">City</h6>
+                                                </div>
+                                                <div class="col-sm-9 text-secondary">
+                                                  <%=locals.user.city  %>
+                                                </div>
+                                              </div>
+                                              <hr>
+                                              <div class="row">
+                                                <div class="col-sm-12">
+                                                  <a class="btn btn-info" href="/updateAdmin/<%=locals.user.id %>">Edit</a>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                            
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+ <%- include('layouts/footer') %>

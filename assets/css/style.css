@@ -1,0 +1,95 @@
+a{
+    display: inline-block;
+    text-decoration: none;
+    color: red;
+}
+.navbar {
+    background-color: #f8f9fa; 
+    border-bottom: 1px solid #ddd;
+}
+
+.navbar-brand span {
+    font-size: 1.5rem;
+    color: #007bff;
+}
+
+.navbar-nav .nav-link {
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #007bff;
+}
+
+.navbar-nav .dropdown-menu {
+    border-radius: 10px;
+    padding: 10px 0;
+    overflow: hidden;
+}
+
+.navbar-nav .dropdown-item {
+    padding: 8px 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar-nav .dropdown-item:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.navbar-toggler {
+    border: none;
+}
+
+.navbar-toggler-icon {
+    color: #007bff;
+}
+
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+    object-fit: cover;
+    height: 100%;
+}
+
+.category {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.category h5 {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.category ul {
+    padding-left: 0;
+    margin: 0;
+}
+
+.category ul li a {
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background-color 0.3s, color 0.3s;
+    color: #333;
+    padding: 8px 12px;
+    border-radius: 6px;
+}
+
+.category ul li a:hover {
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+}
+
+.category ul li a i {
+    font-size: 1.2rem;
+}

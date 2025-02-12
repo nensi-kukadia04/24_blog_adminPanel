@@ -1,0 +1,147 @@
+a{
+    display: inline-block;
+    text-decoration: none;
+    color: red;
+}
+.navbar {
+    background-color: #f8f9fa; 
+    border-bottom: 1px solid #ddd;
+}
+
+.navbar-brand span {
+    font-size: 1.5rem;
+    color: #007bff;
+}
+
+.navbar-nav .nav-link {
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #007bff;
+}
+
+.navbar-nav .dropdown-menu {
+    border-radius: 10px;
+    padding: 10px 0;
+    overflow: hidden;
+}
+
+.navbar-nav .dropdown-item {
+    padding: 8px 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar-nav .dropdown-item:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.navbar-toggler {
+    border: none;
+}
+
+.navbar-toggler-icon {
+    color: #007bff;
+}
+
+
+main {
+    display: flex;
+    margin: 20px;
+    gap: 20px; 
+}
+
+.user-section {
+    flex: 3;
+}
+
+.user-details {
+    display: flex;
+    align-items: flex-start;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user-image img {
+    margin-right: 20px;
+}
+
+.user-info h2 {
+    margin: 0 0 10px;
+    font-size: 1.5rem;
+}
+
+.user-info p {
+    color: #555;
+    line-height: 1.5;
+}
+
+/* Blog Section */
+aside.blog-section {
+    flex: 1;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.blog-section h2 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    color: #343a40;
+}
+
+.blog {
+    display: flex;
+    margin-bottom: 20px;
+    align-items: flex-start;
+    gap: 15px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.blog:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.blog-image img {
+    max-width: 90px;
+    border-radius: 5px;
+}
+
+.blog-info h3 {
+    margin: 0 0 5px;
+    font-size: 1.0rem;
+    color: #343a40;
+}
+
+.blog-info h3:hover {
+    text-decoration: underline;
+}
+
+.blog-info p {
+    margin: 0 0 10px;
+    color: #666;
+}
+
+.blog-info a {
+    color: #007BFF;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.blog-info a:hover {
+    text-decoration: underline;
+}

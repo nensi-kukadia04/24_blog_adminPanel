@@ -1,0 +1,125 @@
+<%- include("../layouts/header") %>
+
+    <!--end::Sidebar-->
+    <!--begin::App Main-->
+    <main class="app-main">
+        <!--begin::App Content Header-->
+        <div class="app-content-header">
+            <!--begin::Container-->
+            <div class="container-fluid">
+                <!--begin::Row-->
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h3 class="mb-0">Blogs Data</h3>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-end">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Blogs</li>
+                        </ol>
+                    </div>
+                </div>
+                <!--end::Row-->
+            </div>
+            <!--end::Container-->
+        </div>
+        <!--end::App Content Header-->
+        <!--begin::App Content-->
+        <div class="app-content">
+            <!--begin::Container-->
+            <div class="container-fluid">
+                <!--begin::Row-->
+
+                <!-- /.col -->
+                <div class="d-flex pb-3">
+                    <form action="/Blogs/viewBlogs" method="get" class="d-flex">
+                        <input type="search" name="blogSearch" class="form-control me-2" placeholder="Search Blogs" value="<%= search %>">
+                        <button type="submit" value="submit" class="btn btn-outline-primary">Search</button>
+                    </form>
+                    <a href="/blogs/viewBlogs" class="ms-2 btn btn-outline-dark">reset</a>
+                </div>
+                <!-- /.card -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">View Admin Data</h3>
+                    </div>
+                    <!-- /.card-header -->
+
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+
+                                    <th>#</th>
+                                    <th>Category</th>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th>image</th>
+                                    <th>status</th>
+                                    <th>Author</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <% empData.map((v,i)=>{ %>
+                                    <tr class="align-middle">
+                                        <td>
+                                            <%= ++no %>
+                                        </td>
+                                        <td>
+                                            <%= v.categoryId ? v.categoryId.categoryName : 'N/A' %>
+
+                                        </td>
+                                        <td>
+                                            <%= v.title.substr(0,20) %>
+                                        </td>
+                                        <td>
+                                            <%- v.description.substr(0,20) %>.... <a href="" class="btn btn-sm btn-primary">Read More</a>
+                                        </td>
+                                        <td>
+                                            <img src="<%= v.image %>" alt="img" width="100px" height="100px">
+                                        </td>
+                                        <td>
+                                            <% if(v.status){ %>
+                                                <a href="/blogs/activeStatus/?blogId=<%= v.id %>&status=true" class="btn btn-sm btn-success">Active</a>
+                                            <% }else{ %>
+                                                <a href="/blogs/activeStatusTrue/?blogId=<%= v.id %>&status=false" class="btn btn-sm btn-danger">Deactive</a>
+                                            <% } %>
+                                        </td>
+                                        <td>
+                                            <%= v.author %>
+                                        </td>
+                                        <td>
+                                            <a href="/blogs/deleteblog/<%= v. id %>" class="btn btn-danger btn-sm">Delete</a>
+                                            ||
+                                            <a href="/blogs/updateblog/?blogid=<%= v.id %>" class="btn btn-primary btn-sm">Update</a>
+                                        </td>
+                                    </tr>
+                                    <% }) %>
+                                    <tr>
+                                        <td>
+                                            <a href="/blogs/viewBlogs?page=<%=parseInt(page)-1%>&blogSearch=<%= search %>"><button <%= page<1 ? 'disabled' : '' %>>Prev</button></a>
+                                            <a href="/blogs/viewBlogs?page=<%=parseInt(page)%>"><button><%=parseInt(page)+1 %></button></a>
+                                            <a href="/blogs/viewBlogs?page=<%=parseInt(page)+ 1%>&blogSearch=<%= search %>"><button <%= totalCounts<=parseInt(page)+ 1 ? 'disabled' : '' %>>Next</button></a>
+                                        </td>
+                                    </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+
+                <!-- /.col -->
+
+                <!--end::Row-->
+            </div>
+            <!--end::Container-->
+        </div>
+        <!--end::App Content-->
+    </main>
+    <!--end::App Main-->
+    <!--begin::Footer-->
+
+    <%- include("../layouts/footer") %>

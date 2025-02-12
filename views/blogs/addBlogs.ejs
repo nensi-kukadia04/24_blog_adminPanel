@@ -1,0 +1,135 @@
+<%-include('../layouts/header') %>
+    <!--begin::App Main-->
+    <main class="app-main">
+        <!--begin::App Content Header-->
+        <div class="app-content-header">
+            <!--begin::Container-->
+            <div class="container-fluid">
+                <!--begin::Row-->
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h3 class="mb-0">Add Blogs Details</h3>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-end">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Blogs</li>
+                        </ol>
+                    </div>
+                </div>
+                <!--end::Row-->
+            </div>
+            <!--end::Container-->
+        </div>
+        <!--end::App Content Header-->
+        <!--begin::App Content-->
+        <div class="app-content">
+            <!--begin::Container-->
+            <div class="container-fluid">
+                <!--begin::Row-->
+                <div class="row g-4 justify-content-center">
+                    <!--begin::Col-->
+                    <div class="col-md-6">
+                        <!--begin::Quick Example-->
+                        <div class="card card-primary card-outline mb-4 ">
+                            <!--begin::Form-->
+                            <form method="post" action="/blogs/insertblog" enctype="multipart/form-data">
+                                <!--begin::Body-->
+                                <div class="card-body">
+                                    <!--begin::Col-->
+                                    <div class="mb-3">
+                                        <label for="validationCustom01" class="form-label fw-bold">Enter Category :</label>
+                                        <select name="categoryId">
+                                            <option value="">--Select category--</option>
+                                            <% addCategory.map((v,i)=>{ %>
+                                                <option value="<%= v.id %>" <% if(old && old.categoryId){if(old.categoryId==v.id){ %><%= 'selected' %><% }} %> ><%= v.categoryName %></option>
+                                            <% }) %>
+                                        </select>
+                                        <% if(errorData && errorData.categoryId){ %>
+                                            <span class="text-danger">
+                                                <%= errorData.categoryId.msg %>
+                                            </span>
+                                        <% } %>
+                                    </div>
+                                    <!--end::Col-->
+                                    <!--begin::Col-->
+                                    <div class="mb-3">
+                                        <label for="validationCustom01" class="form-label fw-bold">Title :</label>
+                                        <input type="text" class="form-control" id="validationCustom01"
+                                            placeholder="Title" name="title" value="<% if(old && old.title){%><%=old.title%><% } %>" />
+                                            <% if(errorData && errorData.title){ %>
+                                                <span class="text-danger">
+                                                    <%= errorData.title.msg %>
+                                                </span>
+                                            <% } %>
+                                    </div>
+                                    <!--end::Col-->
+                                    <!--begin::Col-->
+                                    <div class="mb-3">
+                                        <label for="validationCustom02" class="form-label fw-bold">Description :</label>
+                                        <textarea type="text" class="form-control" id="validationCustom02"
+                                            placeholder="Description" name="description" ><% if(old && old.description){%><%=old.description%><% } %></textarea>
+                                            <% if(errorData && errorData.description){ %>
+                                                <span class="text-danger">
+                                                    <%= errorData.description.msg %>
+                                                </span>
+                                            <% } %>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <label class="input-group-text fw-bold" for="inputGroupFile02">Upload File</label>
+                                        <input type="file" class="form-control" name="image" id="inputGroupFile02" />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleInputPassword1" class="form-label fw-bold">Author :</label>
+                                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Author"
+                                            name="author" value="<% if(old && old.author){%><%=old.author %><% } %>" />
+                                            <% if(errorData && errorData.author){ %>
+                                                <span class="text-danger">
+                                                    <%= errorData.author.msg %>
+                                                </span>
+                                            <% } %>
+                                    </div>
+                                    
+                                </div>
+                                <!--end::Body-->
+                                <!--begin::Footer-->
+                                <div class="card-footer">
+                                    <a href=""><button type="submit" value="submit" name="add blog" class="btn btn-primary">Submit</button></a>
+                                </div>
+                                <!--end::Footer-->
+                            </form>
+                            <!--end::Form-->
+                        </div>
+                    </div>
+                    <!--end::Input Group-->
+                </div>
+                <!--end::Col-->
+            </div>
+            <!--end::Row-->
+        </div>
+        <!--end::Container-->
+    </main>
+    <!--end::App Main-->
+
+    <%- include('../layouts/footer') %>
+    <script src="https://cdn.tiny.cloud/1/cb0lp8h3g2efnjtad2nfn5hht7rfc8jvkyodq36vvieaj0yq/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+          selector: 'textarea',
+          plugins: [
+            // Core editing features
+            'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
+            // Your account includes a free trial of TinyMCE premium features
+            // Try the most popular premium features until Feb 5, 2025:
+            'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown','importword', 'exportword', 'exportpdf'
+          ],
+          toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+          tinycomments_mode: 'embedded',
+          tinycomments_author: 'Author name',
+          mergetags_list: [
+            { value: 'First.Name', title: 'First Name' },
+            { value: 'Email', title: 'Email' },
+          ],
+          ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
+        });
+      </script>

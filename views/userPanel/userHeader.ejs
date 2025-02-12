@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Panel</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/fonts/remix-icon/remixicon.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-light p-3 ">
+            <div class="container-fluid">
+                <a class="navbar-brand d-flex align-items-center" href="#">
+                    <img src="/img/logo.png" alt="Logo">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-flex align-items-center">
+                        <li class="nav-item">
+                            <a class="nav-link active fw-bold text-primary" aria-current="page" href="/">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <% if(locals.user){ %>
+                                <a aria-current="page" href="#" class="btn btn-sm btn-danger text-white me-3 d-flex align-items-center" data-bs-toggle="dropdown">
+                                    <i class="ri-user-fill me-2"></i><%= locals.user.username %>
+                                    <i class="ri-arrow-down-s-line"></i>
+                                </a>
+                                <ul class="dropdown-menu border-0 shadow">
+                                    <li>
+                                        <a class="dropdown-item" href="/changeUserPassword"><i class="ri-lock-password-line"></i>
+                                            Change Password
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/myProfile" class="dropdown-item"><i class="ri-profile-line"></i>
+                                            Profile
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/userLogout" class="dropdown-item"><i class="ri-logout-box-line"></i>
+                                            Sign out
+                                        </a>
+                                    </li>
+                                </ul>
+                            <% }else{ %>
+                                <a aria-current="page" href="/userLogin" class="btn btn-sm btn-danger text-white me-3 d-flex align-items-center">
+                                    <i class="ri-user-fill me-2"></i>Login
+                                </a>
+                            <% } %>
+                        </li>
+                    </ul>
+                    <form class="d-flex" role="search">
+                        <input type="search" name="searchBlogs" class="form-control me-2" placeholder="Search Blogs">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="ri-search-2-line"></i>
+                        </button>
+                        <a href="/" class="ms-2 btn btn-outline-dark">reset</a>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <main>
+        <div class="row g-4 m-0">
+            <!-- Sidebar -->
+            <aside class="col-md-3">
+                <div class="bg-light p-4 rounded category shadow-sm">
+                    <h5 class="mb-4 text-center text-primary">Categories</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2">
+                            <a href="/">All Categories (<%= totalRecord %>)</a>
+                        </li>
+                        <% allCategory.map((v, i) => { %>
+                            <li class="nav-item mb-2">
+                                <a href="/?catId=<%=v.id%>" class="nav-link d-flex align-items-center">
+                                    <i class="ri-newspaper-line text-warning me-2"></i>
+                                    <span><%= v.categoryName %>(<%=v.blogId.length%>)</span>
+                                </a>
+                            </li>
+                        <% }) %>
+                    </ul>
+                </div>
+            </aside>

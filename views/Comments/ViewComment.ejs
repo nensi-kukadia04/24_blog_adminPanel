@@ -1,0 +1,44 @@
+<%- include('../layouts/header') %>
+<!-- Main Content -->
+<div class="container mt-4 mb-4">
+    <h1 class="mb-4 text-center">Comment Section</h1>
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <% if (viewComments && viewComments.length > 0) { %>
+                <div class="row">
+                    <% viewComments.map((v, i) => { %>
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card border-0 shadow-sm h-100">
+                                <div class="card-body d-flex align-items-center">
+                                    <img src="<%= v.image %>" alt="User Image" height="60" width="60"
+                                        class="rounded-circle me-3">
+                                    <div>
+                                        <h5 class="fw-bold mb-1">
+                                            <%= v.name %>
+                                        </h5>
+                                        <p class="mb-1 text-muted"><strong>Email:</strong>
+                                            <%= v.email %>
+                                        </p>
+                                        <p class="text-secondary mb-0"><strong>Comments:</strong>
+                                            <%= v.comment %>
+                                        </p>
+                                        <% if(v.status){ %>
+                                            <a href="/Comments/changeStatus/?commentId=<%= v.id %>&status=true" class="btn btn-sm btn-success">Active</a>
+                                        <% }else{ %>
+                                            <a href="/Comments/changeStatusTrue/?commentId=<%= v.id %>&status=false" class="btn btn-sm btn-danger">Deactive</a>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% }) %>
+                </div>
+            <% } else { %>
+                <p class="text-muted text-center">No active comments available.</p>
+            <% } %>
+        </div>
+    </div>
+</div>
+
+<!-- Include Footer -->
+<%- include("../layouts/footer") %>

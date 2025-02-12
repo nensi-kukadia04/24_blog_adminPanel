@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Details Page</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/fonts/remix-icon/remixicon.css" type="text/css">
+    <link rel="stylesheet" href="/userPanel/css/style.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-light p-3 ">
+            <div class="container-fluid">
+                <a class="navbar-brand d-flex align-items-center" href="#">
+                    <img src="/img/logo.png" alt="Logo">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-flex align-items-center">
+                        <li class="nav-item">
+                            <a class="nav-link active fw-bold text-primary" aria-current="page" href="/">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <% if(locals.user){ %>
+                                <a aria-current="page" href="#" class="btn btn-sm btn-danger text-white me-3 d-flex align-items-center" data-bs-toggle="dropdown">
+                                    <i class="ri-user-fill me-2"></i><%= locals.user.username %>
+                                    <i class="ri-arrow-down-s-line"></i>
+                                </a>
+                                <ul class="dropdown-menu border-0 shadow">
+                                    <li>
+                                        <a class="dropdown-item" href="/changeUserPassword"><i class="ri-lock-password-line"></i>
+                                            Change Password
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/myProfile" class="dropdown-item"><i class="ri-profile-line"></i>
+                                            Profile
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/userLogout" class="dropdown-item"><i class="ri-logout-box-line"></i>
+                                            Sign out
+                                        </a>
+                                    </li>
+                                </ul>
+                            <% }else{ %>
+                                <a aria-current="page" href="/userLogin" class="btn btn-sm btn-danger text-white me-3 d-flex align-items-center">
+                                    <i class="ri-user-fill me-2"></i>Login
+                                </a>
+                            <% } %>
+                        </li>
+                    </ul>
+                    <form class="d-flex" role="search">
+                        <input type="search" name="searchBlogs" class="form-control me-2" placeholder="Search Blogs">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="ri-search-2-line"></i>
+                        </button>
+                        <a href="/" class="ms-2 btn btn-outline-dark">reset</a>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="user-section">
+            <h1>User Details</h1>
+            <div class="user-details">
+                <div class="user-image">
+                    <img src="<%=UserDetails.image %>" alt="User Image" height="300px">
+                </div>
+                <div class="user-info">
+                    <h2>
+                        <%=UserDetails.title %>
+                    </h2>
+                    <p><%- UserDetails.description %></p>
+                    <% if(locals.user){%>
+                        <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#commentSection">Add Comment</a>
+                    <% }else{ %>
+                        <a href="/userLogin" class="btn btn-sm btn-primary">Add Comment</a>
+                    <% } %>
+                </div>
+            </div>
+            
+            <div class="mt-4">
+                <% if (viewComments && viewComments.length > 0) { %>
+                    <div class="row">
+                        <% viewComments.map((v, i) => { %>
+                            <div class="col-md-6 col-lg-4 mb-4">
+                                <div class="card border-0 shadow-sm h-100">
+                                    <div class="card-body d-flex align-items-center">
+                                        <img src="<%=v.image %>" alt="User Image" height="60" width="60"
+                                        class="rounded-circle me-3">
+                                        <div>
+                                            <p class="text-secondary mb-0"><strong>Comments:</strong>
+                                                <%= v.comment %>
+                                                <% if(locals.user){%>
+                                                    <% if(v.likes.includes(locals.user._id)){ %>
+                                                        <a href="/setlikesByUser/<%=v.id%>"><i class="ri-heart-fill text-dark"></i><%= v.likes.length %></a>
+                                                    <% }else { %>
+                                                        <a href="/setlikesByUser/<%=v.id%>"><i class="ri-heart-line text-dark"><%=v.likes.length %></i></a>
+                                                    <% } %>
+                                                    <% if(v.dislikes.includes(locals.user._id)){ %>
+                                                         <a href="/setDisLikesByUser/<%=v.id%>"><i class="ri-dislike-fill text-dark"><%= v.dislikes.length %></i></a>
+                                                         <% }else{ %>
+                                                            <a href="/setDisLikesByUser/<%=v.id%>"><i class="ri-dislike-line text-dark"><%= v.dislikes.length %></i></a>
+                                                    <% } %>
+                                                <% }else{ %>
+                                                    <a href="/userLogin" class="btn btn-sm btn-primary">Add Comment</a>
+                                                <% } %>
+                                            </p>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }) %>
+                    </div>
+                <% } else { %>
+                    <p class="text-muted text-center">No active comments available.</p>
+                <% } %>
+        </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="commentSection" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Add Comment</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post" action="/singlePage/CommentSection" enctype="multipart/form-data">
+                                <input type="hidden" name="PostId" value="<%=PostId%>">
+                                <div class="mb-3">
+                                    <label for="validationCustom02" class="form-label fw-bold">Enter Name :</label>
+                                    <input type="text" class="form-control" id="validationCustom02" placeholder="Name"
+                                        name="name" required />
+                                </div>
+                                <div class="mb-3">
+                                    <label for="validationCustom02" class="form-label fw-bold">Enter Email :</label>
+                                    <input type="email" class="form-control" id="validationCustom02" placeholder="Email"
+                                        name="email" required />
+                                </div>
+                                <div class="mb-3">
+                                    <label for="validationCustom02" class="form-label fw-bold">Enter Comment :</label>
+                                    <textarea class="form-control" id="validationCustom02" placeholder="Comment"
+                                        name="comment"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label fw-bold">Image :</label>
+                                    <input type="file" class="form-control" id="exampleInputPassword1" name="image" />
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" name="submit" value="Add Comment" class="btn btn-primary">Add
+                                            Comment</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <aside class="blog-section">
+            <h2>Recent Blogs</h2>
+            <% allBlogs.map((v, i)=> { %>
+                <div class="blog">
+                    <div class="blog-image">
+                        <img src="<%= v.image %>" alt="Blog Image">
+                    </div>
+                    <div class="blog-info">
+                        <h4>
+                            <%= v.title.substr(0,30) %>
+                        </h4>
+                        <p><%- v.description.substr(0,60) %>...</p>
+                        <a href="/singlePage/<%= v.id %>">Read More</a>
+                    </div>
+                </div>
+                <% }) %>
+        </aside>
+
+        
+    </main>
+</body>
+
+<script src="/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+
+</html>
